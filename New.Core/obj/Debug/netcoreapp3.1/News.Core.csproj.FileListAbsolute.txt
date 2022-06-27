@@ -1,0 +1,13 @@
+D:\Workspace\C#\Asp.NetCore\News\New.Core\bin\Debug\netcoreapp3.1\News.Core.deps.json
+D:\Workspace\C#\Asp.NetCore\News\New.Core\bin\Debug\netcoreapp3.1\News.Core.dll
+D:\Workspace\C#\Asp.NetCore\News\New.Core\bin\Debug\netcoreapp3.1\News.Core.pdb
+D:\Workspace\C#\Asp.NetCore\News\New.Core\bin\Debug\netcoreapp3.1\News.DataLayer.dll
+D:\Workspace\C#\Asp.NetCore\News\New.Core\bin\Debug\netcoreapp3.1\News.DataLayer.pdb
+D:\Workspace\C#\Asp.NetCore\News\New.Core\obj\Debug\netcoreapp3.1\News.Core.AssemblyInfoInputs.cache
+D:\Workspace\C#\Asp.NetCore\News\New.Core\obj\Debug\netcoreapp3.1\News.Core.AssemblyInfo.cs
+D:\Workspace\C#\Asp.NetCore\News\New.Core\obj\Debug\netcoreapp3.1\News.Core.csproj.CoreCompileInputs.cache
+D:\Workspace\C#\Asp.NetCore\News\New.Core\obj\Debug\netcoreapp3.1\News.Core.csproj.CopyComplete
+D:\Workspace\C#\Asp.NetCore\News\New.Core\obj\Debug\netcoreapp3.1\News.Core.dll
+D:\Workspace\C#\Asp.NetCore\News\New.Core\obj\Debug\netcoreapp3.1\News.Core.pdb
+D:\Workspace\C#\Asp.NetCore\News\New.Core\obj\Debug\netcoreapp3.1\News.Core.csproj.AssemblyReference.cache
+D:\Workspace\C#\Asp.NetCore\News\New.Core\obj\Debug\netcoreapp3.1\News.Core.GeneratedMSBuildEditorConfig.editorconfig

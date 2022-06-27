@@ -1,0 +1,66 @@
+﻿@using News.Core.Services.Interfaces
+@inject IGroupService group;
+@{
+    ViewData["Title"] = "_Footer";
+    var groups = group.GetAllGorups();
+}
+
+<div class="separator"></div>
+<div class="footer-top">
+    <div class="wrapper clearfix">
+        <aside class="footer-aside" id="sidebar-1">
+            <a class="footer-logo" href="/Home"><img src="/images/icons/Logo200-90.png" alt="logo"></a>
+        </aside><!--footer-aside-->
+        <aside class="footer-aside" id="sidebar-2">
+            <h5 class="widget-title">ما را دنبال کنید</h5>
+            <ul class="social-links clearfix">
+                <li class="facebook-icon">
+                    <a target="_blank" title="Facebook" class="facebook" href="#">Facebook</a>
+                    <img class="responsive-img" src="/images/icons/facebook.png" alt="" />
+                </li>
+                <li class="twitter-icon">
+                    <a target="_blank" title="Twitter" class="twitter" href="#">Twitter</a>
+                    <img class="responsive-img" src="/images/icons/twitter.png" alt="" />
+                </li>
+                <li class="rss-icon">
+                    <a target="_blank" title="RSS" href="#">Rss</a>
+                    <img class="responsive-img" src="/images/icons/rss.png" alt="" />
+                </li>
+                <li class="google-icon">
+                    <a target="_blank" title="Google+" class="google" href="#">Google</a>
+                    <img class="responsive-img" src="/images/icons/google.png" alt="" />
+                </li>
+                <li class="dribble-icon">
+                    <a target="_blank" title="Dribble" class="dribble" href="#"></a>
+                    <img class="responsive-img" src="/images/icons/dribble.png" alt="" />
+                </li>
+            </ul><!--end:social-links-->
+        </aside><!--footer-aside-->
+        <aside class="footer-aside last" id="sidebar-3">
+            <h5 class="widget-title">
+                عضویت در لیست پستی ما
+            </h5>
+            <div class="news-letter clearfix">
+                <form class="newsletter-form" method="post" asp-controller="Home" asp-action="NewsLetter">
+                    <p class="input-email clearfix">
+                        <input type="text" size="40" class="email" value="Your email" name="email" onBlur="if(this.value=='')this.value=this.defaultValue;" onFocus="if(this.value==this.defaultValue)this.value='';">
+                        <input type="submit" class="submit" value="Submit">
+                    </p>
+                </form>
+            </div><!--news-letter-->
+        </aside><!--footer-aside-->
+    </div><!--end:wrapper-->
+</div><!--footer-top-->
+<div class="footer-bottom">
+    <div class="wrapper clearfix">
+        <p id="copylefts">کپی رایت@2021 تمام حقوق مادی و معنوی این سایت متعلق به وبسایت روبین وب میباشد</p>
+        <nav id="bottom-menu">
+            <ul>
+                @foreach (var item in groups.Where(g=>g.ParentId==null))
+                {
+                    <li><a href="/Blogs/@item.GroupId">@item.GroupName</a></li>
+                }
+            </ul>
+        </nav>
+    </div><!--end:wrapper-->
+</div><!--footer-bottom-->

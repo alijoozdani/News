@@ -1,0 +1,59 @@
+﻿@model string
+<aside class="main-sidebar">
+    <section class="sidebar">
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="header">منو</li>
+            <li class="@((Model=="dashbord"?"active":null))">
+                <a href="/Admin">
+                    <i class="fa fa-dashboard"></i> <span>داشبرد</span>
+                </a>
+            </li>
+            <li class="@((Model.Contains("user")?"active treeview":"treeview"))">
+                <a href="#">
+                    <i class="fa fa-users"></i>
+                    <span>کاربران</span>
+                    <span class="pull-left-container">
+                        <i class="fa fa-angle-right pull-left"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="@((Model=="users"?"active":null))"><a href="/Admin/Users"><i class="fa fa-circle-o"></i>لیست کاربران</a></li>
+                    <li class="@((Model=="userRoles"?"active":null))"><a href="/Admin/Roles"><i class="fa fa-circle-o"></i>مدیریت نقش ها</a></li>
+                </ul>
+            </li>
+            <li class="@((Model.Contains("blogs")?"active treeview":"treeview"))">
+                <a href="#">
+                    <i class="fa fa-users"></i>
+                    <span>اخبار</span>
+                    <span class="pull-left-container">
+                        <i class="fa fa-angle-right pull-left"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="@((Model=="categories"?"active":null))"><a href="/Admin/Categories"><i class="fa fa-circle-o"></i>گروه دسته بندی</a></li>
+                    <li class="@((Model=="blogs"?"active":null))"><a href="/Admin/Blogs"><i class="fa fa-circle-o"></i>مدیریت خبرها</a></li>
+                </ul>
+            </li>
+            <li class="@((Model=="aboutUs"?"active":null))">
+                <a href="/Admin/AboutUs">
+                    <i class="fa fa-home"></i>
+                    <span>درباره ما</span>
+                </a>
+            </li>
+            <li class="@((Model.Contains("contactUs")?"active treeview":"treeview"))">
+                <a href="#">
+                    <i class="fa fa-phone"></i>
+                    <span>تماس با ما</span>
+                    <span class="pull-left-container">
+                        <i class="fa fa-angle-right pull-left"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="@((Model=="contactUsForm"?"active":null))"><a href="/Admin/contactUs/HelpForm"><i class="fa fa-circle-o"></i>پیام های دریافتی</a></li>
+                    <li class="@((Model=="contactUs"?"active":null))"><a href="/Admin/contactUs"><i class="fa fa-circle-o"></i>اطلاعات تماس</a></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>

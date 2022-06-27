@@ -1,0 +1,9 @@
+﻿@using News.Core.Services.Interfaces
+@inject IBlogService blogServie
+@{
+    var hotBlogs = blogServie.GetHotBlog();
+}
+@foreach (var item in hotBlogs)
+{
+    <li><a href="/ShowBlog/@item.BlogId">@item.BlogTitle</a></li>
+}

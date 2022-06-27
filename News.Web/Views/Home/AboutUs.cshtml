@@ -1,0 +1,20 @@
+﻿@model News.DataLayer.Entities.AboutUs.AboutUs
+@{
+    ViewData["Title"] = "درباره ما";
+}
+
+<div class="error-404 clearfix center-block text-center" >
+    <div class="breadcrumb clearfix">
+        <span>
+            شما اینجا هستید:
+        </span>
+        <a href="/Home">صفحه اصلی</a>&nbsp;»&nbsp;<a href="#" class="current-page">درباره ما</a>
+    </div>@*end:breadcrumb*@
+    <div class="right-404-col">
+        <p>درباره ما</p>
+    </div>
+    <div class="left-404-col">
+        @Html.Raw(Model.Text)
+    </div><!--left-404-col-->
+</div>
+

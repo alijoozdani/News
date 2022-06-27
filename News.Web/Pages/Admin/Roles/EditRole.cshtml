@@ -1,0 +1,79 @@
+﻿@page "{id}"
+@model News.Web.Pages.Admin.Roles.EditRoleModel
+@using News.Core.Services.Interfaces
+@using News.DataLayer.Entities.Permissions
+@inject IPermissionService permissionService;
+@{
+    var menuModel = "userRoles";
+    List<Permission> permissions = permissionService.GetAllPermissions();
+}
+@if (Model.Role == null)
+{
+
+}
+else
+{
+    <partial name="_MainMenu" model="menuModel" />
+
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box box-info">
+                        <div class="box-header">
+                            <h3 class="box-title">ویرایش نقش</h3>
+                        </div>
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="box-body">
+                            <form method="post" class="row">
+                                <input type="hidden" asp-for="Role.RoleId" />
+                                <input type="hidden" asp-for="Role.IsDelete" />
+                                <div class="col-lg-6" style="margin-top: 10px">
+                                    <p>عنوان نقش</p>
+                                    <input type="text" required="" class="form-control" asp-for="Role.RoleTitle" />
+                                    <button type="submit" style="margin-top: 8px" class="btn btn-block btn-flat btn-success">ثبت</button>
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="box-header">
+                                        <h3 class="box-title">دسترسی ها</h3>
+                                    </div>
+                                    <div>
+                                        @{
+                                            List<int> SelectedPermission = permissionService.PermissionRole(Model.Role.RoleId);
+                                        }
+                                        @foreach (var item in permissions.Where(p => p.ParentID == null))
+                                        {
+                                            <div style="margin:5px 10px; font-weight: bolder; font-size: 16px;color: blue">
+                                                <input type="checkbox" checked="@((SelectedPermission.Any(p=>p==item.PermissionId)?"checked":null))" value="@item.PermissionId" name="permissions" /> @item.PermissionTitle
+                                            </div>
+                                            @if (permissions.Any(p => p.ParentID == item.PermissionId))
+                                            {
+                                                foreach (var sub in permissions.Where(p => p.ParentID == item.PermissionId))
+                                                {
+                                                    <div style="font-weight: bold">
+                                                        <input type="checkbox" checked="@((SelectedPermission.Any(p=>p==sub.PermissionId)?"checked":null))" value="@sub.PermissionId" name="permissions" /> @sub.PermissionTitle
+                                                    </div>
+                                                    @if (permissions.Any(p => p.ParentID == sub.PermissionId))
+                                                    {
+                                                        foreach (var sub2 in permissions.Where(p => p.ParentID == sub.PermissionId))
+                                                        {
+                                                            <div style="margin-right: -5px">
+                                                                <input type="checkbox" checked="@((SelectedPermission.Any(p=>p==sub2.PermissionId)?"checked":null))" value="@sub2.PermissionId" name="permissions" /> @sub2.PermissionTitle
+                                                            </div>
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+}

@@ -1,0 +1,36 @@
+﻿@page
+@model News.Web.Pages.Admin.ContactUs.IndexModel
+@{
+    var menuModel = "contactUs";
+}
+<partial name="_MainMenu" model="menuModel" />
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">تماس با ما</h3>
+                    </div>
+                    <div class="box-body">
+                        @if (Model.ContactUs != null)
+                        {
+                            <a class="btn btn-info btn-flat" href="/Admin/ContactUs/Edit">نمایش \ ویرایش</a>
+                            <hr />
+                            @Model.ContactUs.Title
+                        }
+                        else
+                        {
+                            <a class="btn btn-flat btn-success" href="/Admin/ContactUs/Add">افزودن</a>
+                            <hr />
+                            <div class="alert alert-warning">
+                                هیچ متنی برای این بخش در نظر گرفته نشده از طریق لینک بالا اقدام به ثبت کنید
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,14 @@
+﻿@using News.Core.Services.Interfaces
+@inject IBlogService blogService
+@{
+    var gallery = blogService.GetGalleryImage();
+}
+
+@foreach (var img in gallery)
+{
+    <li>
+        <a class="gallery-img" href="/images/blog/thumb/@img.ImageName" rel="prettyPhoto">
+            <img class="responsive-img scale-hover" src="/images/blog/thumb/@img.ImageName" alt="" />
+        </a>
+    </li>
+}

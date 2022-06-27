@@ -1,0 +1,32 @@
+﻿@model List<ShowBlogsListItemViewModel>
+@using News.Core.DTOs.Blogs
+@using News.Core.Convertor
+@foreach (var item in Model)
+{
+    <li>
+        <article class="entry-item clearfix">
+            <div class="video-thumb">
+                <img class="responsive-img" src="/images/blog/thumb/@item.ImageName" alt="">
+                <a class="play-icon" href="http://vimeo.com/46163823" rel="prettyPhoto">
+                    <span class="black-overlay" style="opacity: 0.3; width:auto;"></span>
+                </a>
+            </div><!--video-thumb-->
+            <div class="entry-content">
+                <span class="entry-meta">در:&nbsp;</span><a class="meta-data" href="#">@item.GroupTitle</a>
+                <span class="entry-meta">&nbsp;&nbsp;|&nbsp;&nbsp;</span><span class="meta-data">@item.CreateDate.ToShamsi()</span>
+                <span class="entry-meta">&nbsp;&nbsp;|&nbsp;&nbsp;توسط:&nbsp;</span><a class="meta-data" href="#">ادمین</a>
+                <h3 class="entry-title">
+                    <a href="/ShowBlog/@item.BlogId">
+
+                        @item.BlogName
+                    </a>
+                </h3>
+                <p>@item.ShortDescription </p>
+                <a class="more-link" href="/ShowBlog/@item.BlogId">
+                    ادامه مطلب
+                    »
+                </a>
+            </div><!--end:entry-content-->
+        </article><!--end:entry-item-->
+    </li>
+}

@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\New.DataLayer",
+    "\\New.DataLayer\\Entities",
+    "\\New.DataLayer\\Entities\\RSS",
+    "\\News.Web",
+    "\\News.Web\\Controllers",
+    "\\News.Web\\Views",
+    "\\News.Web\\Views\\Shared"
+  ],
+  "SelectedNode": "\\New.DataLayer\\Entities\\RSS\\RSS.cs",
+  "PreviewInSolutionExplorer": false
+}

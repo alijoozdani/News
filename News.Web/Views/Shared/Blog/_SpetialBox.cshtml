@@ -1,0 +1,29 @@
+﻿@using News.Core.Convertor
+@using News.Core.Services.Interfaces
+@inject IBlogService blogService;
+@{
+    var Spetials = blogService.GetSpetialBlogs();
+}
+@foreach (var item in Spetials)
+{
+    <li>
+        <article class="feature-item clearfix">
+            <div class="video-thumb">
+                <img class="responsive-img" src="/images/blog/thumb/@item.ImageName" alt="" />
+                <a class="play-icon" href="/images/blog/thumb/@item.ImageName" rel="prettyPhoto">
+                    <span class="black-overlay"></span>
+                </a>
+            </div><!--video-thumb-->
+            <div class="entry-content">
+                <span class="entry-meta">در:&nbsp;</span><a class="meta-data" href="">@item.GroupTitle</a>
+                <span class="entry-meta">&nbsp;&nbsp;|&nbsp;&nbsp;</span><span class="meta-data">@item.CreateDate.ToShamsi()</span>
+                <h4 class="entry-title">
+                    <a href="/ShowBlog/@item.BlogId">
+                        @item.BlogName
+                    </a>
+                </h4>
+
+            </div><!--end:entry_content-->
+        </article>
+    </li>
+}

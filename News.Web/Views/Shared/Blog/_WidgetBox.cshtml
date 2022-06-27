@@ -1,0 +1,26 @@
+﻿@model News.Core.DTOs.Blogs.ShowBlogsListItemViewModel 
+@using News.Core.Convertor
+<li>
+    <aside class="widget clearfix">
+        <h4 class="widget-title"><a href="#">@Model.GroupTitle</a></h4>
+        <article class="entry-box clearfix">
+            <div class="article-thumb">
+                <a href="/ShowBlog/@Model.BlogId" class="hover-effect link-icon">
+                    <img class=" responsive-img" src="/images/blog/thumb/@Model.ImageName" alt="" />
+                </a>
+            </div><!--article-thumb-->
+            <div class="entry-content">
+                <span class="entry-meta">در:&nbsp;</span><a class="meta-data" href="#">@Model.GroupTitle</a>
+                <span class="entry-meta">&nbsp;&nbsp;|&nbsp;&nbsp;</span><span class="meta-data">@Model.CreateDate.ToShamsi()</span>
+                <span class="entry-meta">&nbsp;&nbsp;|&nbsp;&nbsp;توسط:&nbsp;</span><a class="meta-data" href="#">ادمین</a><h3 class="entry-title">
+                    <a href="/ShowBlog/@Model.BlogId">
+
+                        @Model.BlogName
+                    </a>
+                </h3>
+                <p>@Model.ShortDescription</p>
+
+            </div><!--end:entry_content-->
+        </article><!--end:entry-box-->
+    </aside><!--end:widget-->
+</li>

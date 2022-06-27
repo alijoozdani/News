@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "فعال سازی";
+}
+@section HeaderImage{
+    <div class="background"></div>
+    <div class="overlay"></div>
+}
+<div class="container">
+    @if (ViewBag.IsActive)
+    {
+        <div class="alert alert-success">
+            <p>حساب کاربری شما با موفقیت فعال شد</p>
+            <a href="/Login">ورود به سایت</a>
+        </div>
+    }
+    @if (!ViewBag.IsActive)
+    {
+        <div class="alert alert-danger">
+            <p>حساب کاربری شما با مشخصات ارسال شده یافت نشد</p>
+        </div>
+    }
+</div>
+

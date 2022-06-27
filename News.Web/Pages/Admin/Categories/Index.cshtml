@@ -1,0 +1,115 @@
+﻿@page "{handler?}"
+@model News.Web.Pages.Admin.Categories.IndexModel
+@{
+    var menuModel = "categories";
+}
+<partial name="_MainMenu" model="menuModel" />
+
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <section class="col-lg-12 col-md-12">
+                <div class="box box-info">
+                    <div class="box-header">
+
+                        <a href="/Admin/Categories/Add" class="btn btn-success btn-flat">افزودن گروه</a>
+                    </div>
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table class="table-bordered table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>عنوان گروه</th>
+                                        <th>زیر گروه ها</th>
+                                        <td>عملیات</td>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    @foreach (var group in Model.BlogGroups.Where(c => c.ParentId == null))
+                                    {
+                                        <tr>
+                                            <td>@group.GroupId</td>
+                                            <td>@group.GroupName</td>
+                                            <td>
+                                                <ul>
+                                                    @foreach (var sub in Model.BlogGroups.Where(c => c.ParentId == group.GroupId))
+                                                    {
+                                                        <li>
+                                                            <p>
+                                                                @sub.GroupName
+                                                                <a class="btn btn-danger btn-xs pull-left" onclick="deleteItem(@sub.GroupId)">حذف</a>
+                                                                <a class="btn btn-xs btn-info pull-left" href="/Admin/Categories/Edit/@sub.GroupId">ویرایش</a>
+                                                            </p>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <a href="/Admin/Categories/Add/@group.GroupId" class="btn btn-success btn-sm">افزودن زیرگروه</a>
+                                                <a href="/Admin/Categories/Edit/@group.GroupId" class="btn btn-warning btn-sm">ویرایش</a>
+                                                <a onclick="deleteItem(@group.GroupId)" class="btn btn-danger btn-sm">حذف</a>
+
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+</div>
+
+@section Scripts
+{
+    <script>
+
+        function deleteItem(id) {
+            swal({
+                title: "اخطار !!",
+                text: "آیا از حذف گروه اطمینان دارید؟",
+                icon: "warning",
+                buttons: ["خیر", "بله"]
+            }).then((isOk) => {
+                if (isOk) {
+                    $.ajax({
+                        url: "/Admin/Categories/DeleteGroup?groupID=" + id,
+                        type: "get",
+                        beforeSend: function () {
+                            $(".loading").show();
+                        },
+                        complete: function () {
+                            $(".loading").hide();
+                        }
+                    }).done(function (data) {
+                        if (data === "Deleted") {
+                            swal({
+                                title: "اعملیات با موفقیت انجام شد",
+                                icon: "success",
+                                button: "باشه"
+                            }).then((isOk) => {
+                                location.reload();
+                            });
+                        } else {
+                            swal({
+                                title: "اعملیات به مشکل برخورد کرد",
+                                text: ".گروه مورد نظر داری  تعدادی آموزشگاه است ",
+                                icon: "error",
+                                button: "باشه"
+                            });
+                        }
+                    });
+                }
+            });
+
+        }
+    </script>
+}

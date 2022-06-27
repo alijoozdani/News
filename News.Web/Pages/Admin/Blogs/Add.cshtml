@@ -1,0 +1,211 @@
+﻿@page
+@model News.Web.Pages.Admin.Blogs.AddModel
+@{
+    var menu = "blogs";
+}
+<partial name="_MainMenu" model="menu" />
+
+
+<div class="content-wrapper">
+    <form role="form" method="post" enctype="multipart/form-data">
+        <section class="content">
+            <div class="row">
+                <section class="col-lg-12 col-md-12">
+                    <div class="col-md-8">
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">افزودن خبر</h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6" style="margin-top: 8px">
+                                        <p>عنوان خبر</p>
+                                        <input type="text" asp-for="Blog.Title" class="form-control" placeholder="عنوان خبر" />
+                                    </div>
+                                    <div class="col-lg-6 col-md-6" style="margin-top: 8px">
+                                        <p>تگ ها</p>
+                                        <input type="text" asp-for="Blog.Tags" class="form-control" placeholder="تگ ها" />
+                                        <span>لطفا با(-)تگ ها را از هم جدا کنید.</span>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6" style="margin-top: 8px">
+                                        <p>توضیح مختصر</p>
+                                        <textarea rows="10" type="text" asp-for="Blog.ShortDescription" class="form-control" placeholder="توضیح مختصر"></textarea>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6" style="margin-top: 8px">
+                                        <p>خبر ویژه</p>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input asp-for="Blog.IsSpecial" value="True" type="checkbox">
+                                                بله
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12 col-lg-12">
+                                        <label asp-for="Blog.BlogText"></label>
+                                        <div class="box-body pad">
+                                            <textarea asp-for="Blog.BlogText"></textarea>
+                                        </div>
+                                        <span asp-validation-for="Blog.BlogText" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <input type="submit" class="btn btn-success" value="افزودن" />
+
+                            </div>
+                            <!-- /.box-body -->
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">انتخاب تصویر</h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div>
+                                    <img id="imgBlog" class="thumbnail" width="100%" src="/images/blog/no-photo.png" />
+                                </div>
+                                <input type="file" name="imgUpBlog" id="imgUpBlog">
+                            </div>
+                            <!-- /.box-body -->
+
+                        </div>
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">انتخاب گروه ها</h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="checkbox">
+                                    <div class="form-group">
+                                        <label>گروه اصلی</label>
+                                        <select class="form-control" asp-for="Blog.GroupId" asp-items="@(ViewData["Groups"] as SelectList)"></select>
+                                        <span asp-validation-for="Blog.GroupId"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>زیر گروه</label>
+                                        <select class="form-control" asp-for="Blog.SubGroup" asp-items="@(ViewData["SubGroups"] as SelectList)">
+                                        </select>
+                                        <span asp-validation-for="Blog.SubGroup"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </form>
+</div>
+
+@section Scripts
+{
+    <script src="/ckeditor5/build/ckeditor.js"></script>
+    <script>
+        $("#Blog_GroupId").change(function () {
+            $("#Blog_SubGroup").empty();
+
+            $.getJSON("/home/GetSubGroup/" + $("#Blog_GroupId :selected").val(),
+                function (data) {
+
+                    $.each(data,
+                        function () {
+                            $("#Blog_SubGroup").append('<option value=' + this.value + '>' + this.text + '</option>');
+                        });
+                });
+        });
+
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgBlog').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imgUpBlog").change(function () {
+            readURL(this);
+        });
+
+        /// Ck Editor
+        ClassicEditor
+            .create(document.querySelector('#Blog_BlogText'), {
+                simpleUpload: {
+                    uploadUrl: '/Home/UploadBlogImage'
+                },
+                toolbar: {
+                    items: [
+                        'heading',
+                        '|',
+                        'fontSize',
+                        'bold',
+                        'italic',
+                        'link',
+                        '|',
+                        'bulletedList',
+                        'numberedList',
+                        '|',
+                        'codeblock',
+                        'imageUpload',
+                        'blockQuote',
+                        'insertTable',
+                        '|',
+                        'indent',
+                        'outdent',
+                        '|',
+                        'undo',
+                        'redo',
+                    ]
+                },
+                language: 'fa',
+                image: {
+                    toolbar: [
+                        'imageTextAlternative',
+                        'imageStyle:full',
+                        'imageStyle:side'
+                    ]
+                },
+                table: {
+                    contentToolbar: [
+                        'tableColumn',
+                        'tableRow',
+                        'mergeTableCells'
+                    ]
+                },
+                licenseKey: '',
+
+            })
+            .then(editor => {
+                window.editor = editor;
+            })
+            .catch(error => {
+
+                console.error(error);
+            });
+    </script>
+}

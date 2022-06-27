@@ -1,0 +1,12 @@
+D:\Workspace\C#\Asp.NetCore\News\New.DataLayer\bin\Release\netcoreapp3.1\News.DataLayer.deps.json
+D:\Workspace\C#\Asp.NetCore\News\New.DataLayer\bin\Release\netcoreapp3.1\News.DataLayer.runtimeconfig.json
+D:\Workspace\C#\Asp.NetCore\News\New.DataLayer\bin\Release\netcoreapp3.1\News.DataLayer.runtimeconfig.dev.json
+D:\Workspace\C#\Asp.NetCore\News\New.DataLayer\bin\Release\netcoreapp3.1\News.DataLayer.dll
+D:\Workspace\C#\Asp.NetCore\News\New.DataLayer\bin\Release\netcoreapp3.1\News.DataLayer.pdb
+D:\Workspace\C#\Asp.NetCore\News\New.DataLayer\obj\Release\netcoreapp3.1\News.DataLayer.csprojAssemblyReference.cache
+D:\Workspace\C#\Asp.NetCore\News\New.DataLayer\obj\Release\netcoreapp3.1\News.DataLayer.AssemblyInfoInputs.cache
+D:\Workspace\C#\Asp.NetCore\News\New.DataLayer\obj\Release\netcoreapp3.1\News.DataLayer.AssemblyInfo.cs
+D:\Workspace\C#\Asp.NetCore\News\New.DataLayer\obj\Release\netcoreapp3.1\News.DataLayer.csproj.CoreCompileInputs.cache
+D:\Workspace\C#\Asp.NetCore\News\New.DataLayer\obj\Release\netcoreapp3.1\News.DataLayer.dll
+D:\Workspace\C#\Asp.NetCore\News\New.DataLayer\obj\Release\netcoreapp3.1\News.DataLayer.pdb
+D:\Workspace\C#\Asp.NetCore\News\New.DataLayer\obj\Release\netcoreapp3.1\News.DataLayer.genruntimeconfig.cache

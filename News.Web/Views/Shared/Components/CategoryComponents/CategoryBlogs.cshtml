@@ -1,0 +1,60 @@
+﻿@model IEnumerable<News.DataLayer.Entities.Blog.BlogGroup>
+@using News.Core.Services.Interfaces
+@inject IUserService userService;
+@{
+    var userAdmin = false;
+    if (User.Identity.IsAuthenticated)
+    {
+        userAdmin = userService.IsUserAdmin(User.Identity.Name);
+    }
+}
+<nav id="top-nav">
+    <ul id="top-menu" class="clearfix">
+        <li class="current-menu-item">
+            <a href="/Home">صفحه اصلی</a>
+        </li>
+        <li>
+            <a href="/Blog?groupId=0">اخبار</a>
+            <ul>
+                @foreach (var group in Model.Where(g => g.ParentId == null))
+                {
+                    <li>
+                        <a href="/Blog?groupId=@group.GroupId">@group.GroupName</a>
+                        @if (Model.Any(g => g.ParentId == group.GroupId))
+                        {
+                            <ul>
+                                @foreach (var sub in Model.Where(g => g.ParentId == group.GroupId))
+                                {
+                                    <li><a href="/Blog?groupId=@sub.GroupId">@sub.GroupName</a></li>
+                                }
+                            </ul>
+                        }
+                    </li>
+                }
+            </ul>
+        </li>
+        <li><a href="/Contact-Us">تماس باما</a></li>
+        <li><a href="/AboutUs">درباره ما</a></li>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li>
+                @if (userAdmin == true)
+                {
+                    <a href="/Admin">پنل ادمین</a>
+                }
+                else
+                {
+                    <a href="#">@User.Identity.Name عزیز خوش آمدید!</a>
+                }
+                <ul>
+                    <li><a href="/Logout">خروج از حساب</a></li>
+                </ul>
+            </li>
+        }
+        else
+        {
+            <li><a href="/Login">ورود</a></li>
+            <li><a href="/Register">ثبت نام</a></li>
+        }
+    </ul>
+</nav><!--end:top-nav-->

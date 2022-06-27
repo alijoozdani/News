@@ -1,0 +1,66 @@
+﻿@model List<ShowBlogsListItemViewModel>
+@using News.Core.DTOs.Blogs
+
+@{
+    ViewData["Title"] = ViewData["GroupTitle"];
+}
+
+<div class="right-col">
+    <div class="breadcrumb clearfix">
+        <span>
+            شما اینجا هستید:
+        </span>
+        <a href="/Home">صفحه اصلی</a>&nbsp;»&nbsp;<a href="/BLogs/@ViewBag.GroupId" class="current-page">@ViewData["Title"]</a>
+    </div><!--end:breadcrumb-->
+    <ul class="article-list">
+        <partial name="Blog/_BoxBlog" model="Model" />
+        <div class="divider">
+            <form asp-action="Index" method="get" id="form">
+                <input type="hidden" id="take" name="take" value="@int.Parse(ViewData["Take"].ToString())" />
+                <input type="hidden" name="groupId" value="@ViewData["GroupId"].ToString()" />
+                <a onclick="moreBlog(10)" class="load-more">بار بیشتر</a>
+            </form>
+        </div>
+    </ul>
+
+</div><!--end:right-col-->
+<div class="sidebar" id="sidebar-a">
+    <div class="spacer">برای دیدن</div>
+    <div id="widget-list-a-sticky-wrapper" class="sticky-wrapper" style="height: 1674px;">
+        <ul id="widget-list-a" class="" style="">
+            <li>
+                <aside class="widget clearfix">
+                    <h4 class="widget-title">گالری</h4>
+                    <ul class="gallery clearfix">
+                        <partial name="BLog/_Gallery" model="null" />
+                    </ul>
+                </aside><!--end:widget-->
+            </li>
+            <li>
+                <aside class="widget clearfix">
+                    <h4 class="widget-title">اخبار داغ</h4>
+                    <ul>
+                       <partial name="Blog/_HotBlog" model="null" />
+                    </ul>
+                </aside><!--end:widget-->
+            </li>
+            <li style="margin-bottom: 0px;">
+                <aside class="widget clearfix">
+                    <div class="adv-box clearfix">
+                        <a href="/Home"><img class="responsive-img hover-effect" src="/images/background/Logo.png" alt=""></a>
+                    </div><!--end:adv-box-->
+                </aside><!--end:widget-->
+            </li>
+        </ul>
+    </div><!--widget-list-a-->
+</div><!--sidebar-a-->
+
+@section Scripts{
+    <script>
+        function moreBlog(count) {
+            var take = parseInt($("#take").val());
+            $("#take").val(take + count);
+            $("#form").submit();
+        }
+    </script>
+}

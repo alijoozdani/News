@@ -1,0 +1,10 @@
+﻿@model News.DataLayer.Entities.User.User
+@{
+    ViewData["Title"] = "پایان ثبت نام";
+}
+<div class="alert alert-success">
+    <h2>@Model.UserName عزیز!</h2>
+    <p>ثبت نام شما با موفقیت انجام شد "@Model.Email".</p>
+    <p>لطفا به حساب خود <a href="/Login">وارد شوید</a></p>
+</div>
+

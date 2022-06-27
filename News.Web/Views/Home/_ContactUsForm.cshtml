@@ -1,0 +1,35 @@
+﻿@model News.DataLayer.Entities.ContactUs.ContactUsForm
+
+<div id="respond">
+    <h3>
+        ارسال یک پیام
+    </h3>
+    <form id="comments-form" class="clearfix" asp-action="ContactUs" method="post">
+         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="comment-right">
+            <p class="input-block">
+                <label class="required" for="comment-name">نام:</label>
+                <input asp-for="FullName" class="valid" type="text"  id="comment-name" >
+            </p>
+            <p class="input-block">
+                <label class="required" for="comment-email">ایمیل:</label>
+                <input asp-for="Email" type="email" class="valid"  id="comment-email" >
+            </p>
+            <p class="input-block">
+                <label class="required" for="comment-url">تلفن همراه:</label>
+                <input asp-for="PhoneNumber" type="text" id="comment-url"  class="valid" >
+            </p>
+        </div>
+        <div class="comment-left">
+            <p class="textarea-block">
+                <label class="required" for="comment-message">پیام:</label>
+                <textarea asp-for="Description" rows="6" cols="88" id="comment-message" ></textarea>
+            </p>
+        </div>
+        <div class="clear"></div>
+        <p class="comment-button">
+            <input type="submit" id="submit-comment" value="ارسال">
+        </p>
+    </form>
+    <div id="response"></div>
+</div><!--end:respond-->

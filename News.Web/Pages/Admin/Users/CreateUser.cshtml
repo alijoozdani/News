@@ -1,0 +1,116 @@
+﻿@page
+@using News.DataLayer.Entities.User
+@model News.Web.Pages.Admin.Users.CreateUserModel
+@{
+    var menuModel = "users";
+    List<Role> Roles = ViewData["Rols"] as List<Role>;
+}
+
+<partial name="_MainMenu" model="menuModel" />
+
+<div class="content-wrapper">
+    <form role="form" method="post" enctype="multipart/form-data">
+        <section class="content">
+            <div class="row">
+                <section class="col-lg-12 col-md-12">
+                    <div class="col-md-8">
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">افزودن کاربر</h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label asp-for="UserModel.UserName"></label>
+                                        <input type="text" asp-for="UserModel.UserName" class="form-control" />
+                                        <br />
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label asp-for="UserModel.Email"></label>
+
+                                        <input type="email" asp-for="UserModel.Email" class="form-control" />
+                                        <br />
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label asp-for="UserModel.Password"></label>
+
+                                        <input type="text" asp-for="UserModel.Password" class="form-control" />
+                                        <br />
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <label asp-for="UserModel.IsActive"></label>
+
+                                        <select asp-for="UserModel.IsActive" class="form-control">
+                                            <option value="true">فعال</option>
+                                            <option value="false">غیرفعال</option>
+                                        </select>
+                                        <br />
+                                    </div>
+                                </div>
+                                <input type="submit" class="btn btn-success" value="افزودن" />
+
+                            </div>
+                            <!-- /.box-body -->
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">انتخاب نقش</h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="checkbox">
+                                    @foreach (var item in Roles)
+                                    {
+                                        <label>
+                                            <input type="checkbox" name="SelectedRoles" value="@item.RoleId"> @item.RoleTitle
+                                        </label>
+                                        <br />
+                                    }
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </form>
+</div>
+
+@section Scripts
+{
+    <script>
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#imgAvatar').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#UserModel_UserAvatar").change(function() {
+            readURL(this);
+        });
+    </script>
+}

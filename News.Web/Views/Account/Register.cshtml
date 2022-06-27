@@ -1,0 +1,42 @@
+﻿@model News.Core.DTOs.RegisterViewModel
+@{
+    ViewData["Title"] = "ثبت نام";
+}
+
+<div class="login-box">
+    <div class="login-box-body">
+        <p class="login-box-msg">ثبت نام کاربر جدید</p>
+        <form asp-action="Register" method="post">
+            <div class="form-group has-feedback">
+                <input asp-for="UserName" type="text" class="form-control" placeholder="نام کاربری">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input asp-for="Email" type="email" class="form-control" placeholder="ایمیل">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input asp-for="Password" type="password" class="form-control" placeholder="رمز عبور">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input asp-for="RePassword" type="password" class="form-control" placeholder="تکرار رمز عبور">
+                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                <span asp-validation-for="RePassword" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <!-- /.col -->
+                <div>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">ثبت نام</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+
+        <a href="/Login" class="text-center">من قبلا ثبت نام کرده ام</a>
+    </div>
+    <!-- /.form-box -->
+</div>

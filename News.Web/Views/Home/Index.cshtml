@@ -1,0 +1,121 @@
+﻿@model List<ShowBlogsListItemViewModel>
+@using News.Core.DTOs.Blogs
+@using News.Core.Convertor
+@{
+    ViewData["Title"] = "Index";
+    var isSuccess = TempData["Success"] != null;
+}
+
+<div class="primary">
+    <section class="slider-wrapper">
+        <h2 class="widget-title">
+            آخرین اخبار
+        </h2>
+       @* <cache expires-after="TimeSpan.FromMinutes(5)">*@
+            <div id="slider" class="nivoSlider">
+                @foreach (var img in Model.Take(4))
+                {
+                    <a href="/ShowBlog/@img.BlogId" class="slide-img"><img src="/images/blog/@img.ImageName" alt="" title="#slide-caption-@img.BlogId" /></a>
+                }
+            </div>
+            @foreach (var slid in Model.Take(4))
+            {
+
+                <div id="slide-caption-@slid.BlogId" class="nivo-html-caption">
+                    <span class="entry-meta">در:&nbsp;</span><a class="meta-data" href="#">@slid.GroupTitle</a>
+                    <span class="entry-meta">&nbsp;&nbsp;|&nbsp;&nbsp;</span><span class="meta-data">@slid.CreateDate.ToShamsi()</span>
+                    <span class="entry-meta">&nbsp;&nbsp;|&nbsp;&nbsp;توسط:&nbsp;</span><a class="meta-data" href="#">ادمین</a>
+                    <h1 class="slide-title"><a href="/ShowBlog/@slid.BlogId">@slid.BlogName</a></h1>
+                </div>
+            }
+      @*  </cache>*@
+    </section><!--end:slider-wrapper-->
+    <section class="article-tabs">
+        <form id="formFilter" method="get" asp-action="Index" asp-controller="Home">
+            <div class="list-container">
+                <ul class="tabs clearfix">
+                    <li onclick="submitForm(visit)"><a href="#tab1">محبوب</a></li>
+                    @*<li onclick="submitForm(date)"><a href="#tab2">اخیر</a></li>
+                        <li><a href="#tab3">نظرها</a></li>*@
+                </ul><!--end:tabs-->
+            </div><!--end:list-container-->
+            <div class="tab-container">
+                <div id="tab1" class="tab-content">
+                    <ul class="article-list">
+
+                        <cache expires-after="TimeSpan.FromMinutes(10)">
+                            <partial name="Blog/_BoxBlog" model='ViewData["Visit"]' />
+                        </cache>
+
+                    </ul>
+                </div><!--end:tab-content-->
+            </div><!--tab-container-->
+        </form>
+    </section><!--article-tabs-->
+
+</div><!--primary -->
+<div class="secondary clearfix">
+    <div id="top-sidebar">
+        <section class="feature-widget">
+            <h6 class="feature-title">
+                اخبار ویژه
+            </h6>
+            <div class="carousel-wrapper">
+                <div class="list-carousel responsive">
+                    <ul class="feature-news clearfix">
+                        <cache expires-after="TimeSpan.FromMinutes(10)">
+                            <partial name="Blog/_SpetialBox" model="null" />
+                        </cache>
+                    </ul><!--end:feature-news-->
+                    <div class="clear"></div>
+                    <div class="feature-nav">
+                        <a id="prev-1" class="prev" href="#">قبلی</a>
+                        <a id="next-1" class="next" href="#">بعدی</a>
+                    </div><!--feature-nav-->
+                </div><!--end:list-carousel-->
+            </div><!--carousel-wrapper-->
+        </section><!--end:feature-widget-->
+    </div><!--top-sidebar-->
+    <div class="sidebar" id="sidebar-a">
+        <div class="spacer">برای دیدن</div>
+        <ul id="widget-list-a">
+           @* <cache expires-after="TimeSpan.FromMinutes(5)">*@
+                @foreach (var item in Model)
+                {
+                    <partial name="Blog/_WidgetBox" model="item" />
+                }
+           @* </cache>*@
+        </ul><!--widget-list-a-->
+    </div><!--sidebar-a-->
+    <div class="sidebar" id="sidebar-b">
+        <div class="spacer">برای دیدن</div>
+        <ul id="widget-list-b">
+            <li>
+                <aside class="widget clearfix">
+                    <h4 class="widget-title">گالری</h4>
+                    <ul class="gallery clearfix">
+                        <cache expires-after="TimeSpan.FromHours(4)">
+                            <partial name="BLog/_Gallery" model="null" />
+                        </cache>
+                    </ul>
+                </aside><!--end:widget-->
+            </li>
+        </ul><!--widget-list-b-->
+    </div><!--sidebar-b-->
+</div><!--secondary-->
+
+@section Scripts{
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    @if (isSuccess)
+    {
+        <script>
+            swal({
+                title: "عملیات با موفقیت انجام شد",
+                text: "",
+                icon: "success",
+                button: "باشه"
+            });
+        </script>
+
+    }
+}
